@@ -1,0 +1,165 @@
+competency_definitions:
+  planning:
+    description: Planung von Vorhaben, Ressourcen und Arbeitspaketen.
+    related_competencies:
+      - coordination
+    source_skills:
+      - project_management
+  coordination:
+    description: Koordination von Beteiligten, Abhaengigkeiten und Terminen.
+    related_competencies:
+      - planning
+      - communication
+    source_skills:
+      - project_management
+  communication:
+    description: Adressatengerechte Kommunikation und Moderation.
+    related_competencies:
+      - stakeholder_management
+    source_skills:
+      - project_management
+  documentation:
+    description: Nachvollziehbare Dokumentation von Prozessen und Ergebnissen.
+    related_competencies:
+      - communication
+    source_skills:
+      - technical_documentation
+  stakeholder_management:
+    description: Steuerung und Einbindung relevanter Stakeholder.
+    related_competencies:
+      - communication
+    source_skills:
+      - stakeholder_management
+  leadership:
+    description: Fuehrung, Orientierung und Verantwortungsuebernahme.
+    related_competencies:
+      - communication
+    source_skills:
+      - leadership
+  analysis:
+    description: Analyse von Anforderungen, Daten und Zusammenhaengen.
+    related_competencies:
+      - process_improvement
+    source_skills:
+      - data_analysis
+  process_improvement:
+    description: Verbesserung und Standardisierung von Prozessen.
+    related_competencies:
+      - analysis
+      - change_management
+    source_skills:
+      - process_optimization
+  change_management:
+    description: Begleitung und Steuerung von Veraenderungen.
+    related_competencies:
+      - communication
+      - stakeholder_management
+    source_skills:
+      - change_management
+  digitalization:
+    description: Digitalisierung von Prozessen, Services und Organisationen.
+    related_competencies:
+      - change_management
+      - process_improvement
+    source_skills:
+      - digitalization
+
+skill_competency_mapping:
+  project_management:
+    - planning
+    - coordination
+    - communication
+  project_responsibility:
+    - planning
+    - coordination
+    - leadership
+  project_coordination:
+    - planning
+    - coordination
+    - communication
+  supplier_management:
+    - communication
+    - stakeholder_management
+  vendor_management:
+    - communication
+    - stakeholder_management
+  workshop_moderation:
+    - communication
+    - stakeholder_management
+  stakeholder_management:
+    - communication
+    - stakeholder_management
+  technical_documentation:
+    - documentation
+    - communication
+  documentation:
+    - documentation
+    - communication
+  mdm_rollout:
+    - coordination
+    - change_management
+  change_management:
+    - change_management
+    - communication
+    - stakeholder_management
+  digitalization:
+    - digitalization
+    - change_management
+  process_optimization:
+    - analysis
+    - process_improvement
+  data_analysis:
+    - analysis
+  leadership:
+    - leadership
+    - communication
+
+job_competency_keywords:
+  planning:
+    - planung
+    - roadmap
+    - projektplan
+    - program planning
+  coordination:
+    - koordination
+    - coordination
+    - abstimmung
+    - rollout
+  communication:
+    - kommunikation
+    - communication
+    - moderation
+    - praesentation
+    - presentation
+  documentation:
+    - dokumentation
+    - documentation
+  stakeholder_management:
+    - stakeholder
+    - schnittstellen
+    - business partner
+  leadership:
+    - lead
+    - leitung
+    - fuehrung
+    - teamlead
+    - head of
+  analysis:
+    - analyse
+    - analysis
+    - requirements
+    - anforderungen
+  process_improvement:
+    - prozessoptimierung
+    - process improvement
+    - continuous improvement
+  change_management:
+    - change management
+    - veraenderungsmanagement
+    - transformation
+    - rollout
+  digitalization:
+    - digitalisierung
+    - digitalization
+    - digital transformation
+    - business transformation

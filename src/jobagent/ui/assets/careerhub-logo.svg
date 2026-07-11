@@ -1,0 +1,11 @@
+<svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CareerHub logo">
+  <rect width="96" height="96" rx="22" fill="#0F172A"/>
+  <path d="M48 12L79.177 30V66L48 84L16.823 66V30L48 12Z" stroke="#22D3EE" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M48 25L66 43H56V65H40V43H30L48 25Z" fill="#A3E635"/>
+  <circle cx="48" cy="25" r="4" fill="#E2E8F0"/>
+  <circle cx="66" cy="43" r="4" fill="#E2E8F0"/>
+  <circle cx="56" cy="65" r="4" fill="#E2E8F0"/>
+  <circle cx="40" cy="65" r="4" fill="#E2E8F0"/>
+  <circle cx="30" cy="43" r="4" fill="#E2E8F0"/>
+  <path d="M30 43H40M56 43H66M40 65H56" stroke="#38BDF8" stroke-width="3" stroke-linecap="round"/>
+</svg>

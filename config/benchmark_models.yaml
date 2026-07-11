@@ -1,0 +1,21 @@
+models:
+  - name: qwen3:32b
+    runs: 2
+    keep_alive: "30m"
+  - name: qwen3:14b
+    runs: 2
+    keep_alive: "30m"
+  - name: gemma3:27b
+    runs: 2
+    keep_alive: "30m"
+  - name: deepseek-r1:32b
+    runs: 2
+    keep_alive: "30m"
+
+settings:
+  temperature: 0.2
+  top_p: 0.9
+  num_ctx: 8192
+  timeout_seconds: 600
+  tasks_path: benchmarks/prompts/benchmark_tasks.yaml
+

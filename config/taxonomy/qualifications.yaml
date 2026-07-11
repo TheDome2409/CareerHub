@@ -1,0 +1,116 @@
+qualification_rules:
+  - role_pattern: head of it
+    requirement_type: leadership
+    description: Fuehrungserfahrung fuer Head-of-IT-Rollen pruefen.
+    severity: review
+  - role_pattern: head of it
+    requirement_type: experience
+    description: Mehrjaehrige einschlaegige IT-Erfahrung pruefen.
+    severity: review
+  - role_pattern: teamleiter
+    requirement_type: leadership
+    description: Fuehrungserfahrung fuer Teamleiter-Rollen pruefen.
+    severity: review
+  - role_pattern: team lead
+    requirement_type: leadership
+    description: Fuehrungserfahrung fuer Team-Lead-Rollen pruefen.
+    severity: review
+  - role_pattern: elektriker
+    requirement_type: education
+    description: Formale Ausbildung als Elektriker pruefen.
+    severity: blocking
+  - role_pattern: pflegefachkraft
+    requirement_type: education
+    description: Formale Pflegeausbildung pruefen.
+    severity: blocking
+  - role_pattern: arzt
+    requirement_type: education
+    description: Medizinisches Studium pruefen.
+    severity: blocking
+  - role_pattern: arzt
+    requirement_type: license
+    description: Approbation oder passende Berufserlaubnis pruefen.
+    severity: blocking
+  - role_pattern: polizei
+    requirement_type: education
+    description: Laufbahnausbildung im Polizeivollzugsdienst pruefen.
+    severity: blocking
+
+job_intelligence_requirement_map:
+  leadership_experience:
+    role_pattern: job_intelligence
+    requirement_type: leadership
+    description: Fuehrungserfahrung fuer diese Rolle erforderlich.
+    severity: review
+  senior_experience:
+    role_pattern: job_intelligence
+    requirement_type: experience
+    description: Mehrjaehrige einschlaegige Erfahrung erforderlich.
+    severity: review
+  professional_experience:
+    role_pattern: job_intelligence
+    requirement_type: experience
+    description: Einschlaegige Berufserfahrung erforderlich.
+    severity: review
+  transformation_experience:
+    role_pattern: job_intelligence
+    requirement_type: experience
+    description: Transformationserfahrung erforderlich.
+    severity: review
+  education_required:
+    role_pattern: job_intelligence
+    requirement_type: education
+    description: Ausbildung / Studium erforderlich.
+    severity: review
+  degree_required:
+    role_pattern: job_intelligence
+    requirement_type: education
+    description: Studium erforderlich.
+    severity: review
+  vocational_training_required:
+    role_pattern: job_intelligence
+    requirement_type: education
+    description: Formale Ausbildung erforderlich.
+    severity: review
+  certification_required:
+    role_pattern: job_intelligence
+    requirement_type: certification
+    description: Zertifizierung erforderlich.
+    severity: review
+  license_required:
+    role_pattern: job_intelligence
+    requirement_type: license
+    description: Berufserlaubnis / Zulassung erforderlich.
+    severity: review
+  medical_license:
+    role_pattern: job_intelligence
+    requirement_type: license
+    description: Approbation / Berufserlaubnis erforderlich.
+    severity: review
+  security_clearance:
+    role_pattern: job_intelligence
+    requirement_type: security_clearance
+    description: Sicherheitsueberpruefung erforderlich.
+    severity: review
+  driving_license:
+    role_pattern: job_intelligence
+    requirement_type: driving_license
+    description: Fuehrerschein erforderlich.
+    severity: review
+  drivers_license:
+    role_pattern: job_intelligence
+    requirement_type: driving_license
+    description: Fuehrerschein erforderlich.
+    severity: review
+
+formal_review_requirement_types:
+  - license
+  - security_clearance
+
+regulated_role_terms:
+  - arzt
+  - aerztin
+  - pflegefachkraft
+  - pflege
+  - polizei
+  - elektriker

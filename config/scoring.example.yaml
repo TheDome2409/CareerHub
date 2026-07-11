@@ -1,0 +1,147 @@
+weights:
+
+  role_fit: 25
+
+  career_fit: 25
+
+  work_model: 20
+
+  salary: 15
+
+  employer: 15
+
+roles:
+
+  IT Project Manager: 25
+  Manager Digitalisierung: 25
+  Digital Transformation Manager: 25
+  AI Manager: 25
+  KI Manager: 25
+
+  IT Project Coordinator: 22
+  Technical Consultant: 22
+  Team Lead IT: 22
+  Technical Lead: 22
+
+  Integration Consultant: 20
+  Solution Consultant: 18
+  IT Consultant: 18
+
+  System Engineer: 10
+  Infrastructure Engineer: 10
+  System Administrator: 8
+
+  EDI Specialist: 5
+  EDI Consultant: 5
+
+  Helpdesk: 0
+  First Level Support: 0
+
+career:
+
+  leadership: 10
+
+  project_responsibility: 5
+
+  budget_responsibility: 5
+
+  digitalization: 5
+
+  ai: 5
+
+  strategic_role: 5
+
+  innovation: 3
+
+  change_management: 5
+  
+  automation: 5
+  
+  consulting: 3
+  
+  platform: 3
+  
+  cloud: 5
+  
+  data: 3
+  
+  security: 3
+  
+  architecture: 5
+
+work_model:
+
+  remote: 20
+
+  hybrid: 15
+
+  onsite: 5
+
+  poor_public_transport: -10
+
+  commute_over_90min: -15
+
+salary:
+
+  above_100k: 15
+
+  between_90k_100k: 12
+
+  between_80k_90k: 10
+
+  between_70k_80k: 7
+
+  between_60k_70k: 3
+
+  below_60k: 0
+
+employer:
+
+  kununu:
+
+    above_4_3: 10
+
+    above_4_0: 8
+
+    above_3_7: 5
+
+    below_3_5: 0
+
+    below_3_0: -10
+
+  growth: 2
+
+  innovation: 2
+
+  development: 3
+
+red_flags:
+
+  micromanagement: -5
+
+  excessive_overtime: -5
+
+  toxic_culture: -10
+
+  poor_leadership: -10
+
+  high_fluctuation: -5
+
+  unrealistic_requirements: -5
+
+hard_exclusions:
+
+  industries:
+
+    - banking
+    - military
+    - defense
+
+  employment_models:
+
+    - temporary_work
+    - labour_leasing
+
+  requirements:
+
+    - security_clearance

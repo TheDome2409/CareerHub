@@ -1,0 +1,6 @@
+role_opportunity_score: 25
+skill_coverage_score: 30
+competency_coverage_score: 30
+strategic_fit_score: 25
+preference_score: 15
+risk_penalty: 10

@@ -1,0 +1,20 @@
+id: coding_refactor_small_service
+version: 0.1.0
+difficulty: medium
+capabilities:
+  - coding
+  - reasoning
+prompt_template: coding_refactor_v1
+evaluation_profile: evaluation_profiles/coding.yaml
+author: OpenLLMBench
+reviewed_at: null
+license: TBD
+tags:
+  - refactoring
+  - python
+  - tests
+source: synthetic_foundation_task
+expected_output: refactoring_plan_and_code
+metadata:
+  notes: Foundation coding dataset task.
+

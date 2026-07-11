@@ -1,0 +1,142 @@
+skill_patterns:
+  business_transformation:
+    - business transformation
+    - unternehmenstransformation
+    - transformation lead
+    - transformation manager
+  stakeholder_management:
+    - stakeholder
+    - stakeholder management
+    - schnittstellenmanagement
+  workshop_facilitation:
+    - workshop
+    - facilitation
+    - moderation
+    - workshop moderation
+  process_optimization:
+    - prozessoptimierung
+    - process optimization
+    - process improvement
+    - continuous improvement
+  roadmap_development:
+    - roadmap
+    - zielbild
+    - target picture
+  change_management:
+    - change management
+    - veraenderungsmanagement
+    - transformation
+  governance:
+    - governance
+    - steuerungsmodell
+    - kontrollmodell
+  ai_adoption:
+    - ai adoption
+    - ki adoption
+    - ai transformation
+    - ki transformation
+    - kuenstliche intelligenz
+  executive_communication:
+    - executive communication
+    - vorstand
+    - geschaeftsfuehrung
+    - board presentation
+  program_leadership:
+    - program leadership
+    - programmleitung
+    - program management
+    - programm management
+  project_management:
+    - projektmanagement
+    - project management
+    - projektleiter
+    - it projektleiter
+  it_infrastructure:
+    - it-infrastruktur
+    - it infrastructure
+    - infrastruktur
+  cloud:
+    - cloud
+    - azure
+    - aws
+    - microsoft 365
+  patient_care:
+    - pflege
+    - patientenversorgung
+    - patient care
+  medical_documentation:
+    - pflegedokumentation
+    - patientendokumentation
+
+qualification_patterns:
+  degree_required:
+    - studium
+    - hochschulabschluss
+    - university degree
+    - bachelor
+    - master
+  vocational_training_required:
+    - ausbildung
+    - berufsausbildung
+    - apprenticeship
+  certification_required:
+    - zertifizierung
+    - zertifikat
+    - certification
+    - certified
+  leadership_experience:
+    - leadership experience
+    - fuehrungserfahrung
+    - leitungserfahrung
+    - personalfuehrung
+    - teamleitung
+  professional_experience:
+    - berufserfahrung
+    - professional experience
+    - years experience
+    - jahre erfahrung
+  transformation_experience:
+    - transformation experience
+    - transformationserfahrung
+    - change erfahrung
+  security_clearance:
+    - sicherheitsueberpruefung
+    - security clearance
+    - ue2
+    - ue3
+  medical_license:
+    - approbation
+    - berufserlaubnis
+  master_craftsman:
+    - meistertitel
+    - meisterbrief
+  drivers_license:
+    - fuehrerschein
+    - drivers license
+    - driving licence
+
+evidence_patterns:
+  ai_transformation:
+    - ai transformation
+    - ki transformation
+    - ai adoption
+  executive_communication:
+    - executive communication
+    - board presentation
+    - vorstand
+    - geschaeftsfuehrung
+  budget_responsibility:
+    - budget responsibility
+    - budgetverantwortung
+    - budget
+  vendor_management:
+    - vendor management
+    - supplier management
+    - lieferantenmanagement
+  program_leadership:
+    - program leadership
+    - programmleitung
+    - program management
+  board_presentation:
+    - board presentation
+    - vorstandspraesentation

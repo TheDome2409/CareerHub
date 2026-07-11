@@ -1,0 +1,14 @@
+id: analysis
+version: "1.0"
+title: Analysis Human Review
+description: Human review profile for analysis and reasoning outputs.
+criteria:
+  - {id: factual_correctness, label: Factual Correctness, min_score: 0, max_score: 10}
+  - {id: hallucination_risk, label: Hallucination Risk, min_score: 0, max_score: 10}
+  - {id: completeness, label: Completeness, min_score: 0, max_score: 10}
+  - {id: structure, label: Structure, min_score: 0, max_score: 10}
+  - {id: language, label: Language, min_score: 0, max_score: 10}
+  - {id: practical_usefulness, label: Practical Usefulness, min_score: 0, max_score: 10}
+  - {id: explainability, label: Explainability, min_score: 0, max_score: 10}
+  - {id: consistency, label: Consistency, min_score: 0, max_score: 10}
+

@@ -1,0 +1,16 @@
+{
+  "name": "Example Foods",
+  "description": "Synthetic public ground-truth company profile used by tests. It does not describe a real employer.",
+  "source_type": "manual_example",
+  "source_name": "synthetic_public_example",
+  "locations": ["Germany"],
+  "industries": ["manufacturing", "food"],
+  "work_models": ["onsite", "hybrid"],
+  "focus_areas": ["manufacturing", "process quality", "operations"],
+  "possible_use_cases": ["process analysis", "digitalization", "operations coordination"],
+  "detected_skills": ["process_analysis", "documentation", "coordination"],
+  "detected_competencies": ["analysis", "documentation", "coordination"],
+  "qualification_requirements": [],
+  "ground_truth_available": true,
+  "relationship_status": "former_employer"
+}

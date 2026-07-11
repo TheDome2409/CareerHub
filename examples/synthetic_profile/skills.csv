@@ -1,0 +1,14 @@
+type,key,value
+skill,project_coordination,project coordination
+skill,requirements_clarification,requirements clarification
+skill,process_documentation,process documentation
+skill,stakeholder_communication,stakeholder communication
+skill,workflow_analysis,workflow analysis
+preference,salary_minimum,60000
+preference,salary_target,70000
+preference,salary_dream,80000
+preference,work_model_preferred,hybrid
+preference,work_model_acceptable,remote;hybrid
+preference,exclusion_industries,gambling
+preference,exclusion_employment_models,temporary_work
+preference,exclusion_requirements,security_clearance

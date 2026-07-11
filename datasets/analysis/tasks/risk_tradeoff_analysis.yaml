@@ -1,0 +1,19 @@
+id: analysis_risk_tradeoff
+version: 0.1.0
+difficulty: medium
+capabilities:
+  - analysis
+  - reasoning
+prompt_template: analysis_risk_tradeoff_v1
+evaluation_profile: evaluation_profiles/analysis.yaml
+author: OpenLLMBench
+reviewed_at: null
+license: TBD
+tags:
+  - risk
+  - tradeoff
+source: synthetic_foundation_task
+expected_output: structured_analysis
+metadata:
+  notes: Foundation analysis dataset task.
+

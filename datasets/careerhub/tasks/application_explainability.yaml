@@ -1,0 +1,21 @@
+id: careerhub_application_explainability
+version: 0.1.0
+difficulty: medium
+capabilities:
+  - career_matching
+  - explanation
+  - natural_language
+prompt_template: careerhub_explainability_v1
+evaluation_profile: evaluation_profiles/careerhub.yaml
+author: OpenLLMBench
+reviewed_at: null
+license: TBD
+tags:
+  - careerhub
+  - application
+  - explainability
+source: synthetic_foundation_task
+expected_output: structured_explanation
+metadata:
+  notes: Foundation task migrated conceptually from the CareerHub benchmark suite.
+

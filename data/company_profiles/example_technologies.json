@@ -1,0 +1,47 @@
+{
+  "name": "Example Technologies",
+  "description": "Synthetic public demo profile for a venture builder and company builder focused on digital business models, software development and data-informed product development.",
+  "source_type": "manual",
+  "source_name": "synthetic_public_example",
+  "locations": ["Remote", "Germany"],
+  "industries": ["software", "digital business", "venture building"],
+  "work_models": ["remote", "hybrid"],
+  "focus_areas": [
+    "Venture Builder / Company Builder",
+    "digitale Gesch?ftsmodelle",
+    "Softwareentwicklung",
+    "SEO / Online Marketing",
+    "datengetriebene Produktentwicklung",
+    "Beteiligungen / Plattformen"
+  ],
+  "possible_use_cases": [
+    "IT-Projektmanagement",
+    "Digitalisierung",
+    "technische Produktentwicklung",
+    "Business-/Prozessanalyse",
+    "Venture Operations",
+    "KI-gest?tzte Tools wie CareerHub"
+  ],
+  "detected_skills": [
+    "project_management",
+    "digitalization",
+    "business_analysis",
+    "software_development",
+    "product_development",
+    "process_analysis",
+    "ai_tools",
+    "prototyping",
+    "mvp"
+  ],
+  "detected_competencies": [
+    "planning",
+    "coordination",
+    "communication",
+    "digitalization",
+    "change_management",
+    "stakeholder_management"
+  ],
+  "qualification_requirements": [],
+  "ground_truth_available": false,
+  "relationship_status": "synthetic_example"
+}

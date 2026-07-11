@@ -1,0 +1,19 @@
+id: documentation_readme_section
+version: 0.1.0
+difficulty: easy
+capabilities:
+  - documentation
+  - natural_language
+prompt_template: documentation_readme_v1
+evaluation_profile: evaluation_profiles/documentation.yaml
+author: OpenLLMBench
+reviewed_at: null
+license: TBD
+tags:
+  - readme
+  - user_guide
+source: synthetic_foundation_task
+expected_output: markdown_documentation
+metadata:
+  notes: Foundation documentation dataset task.
+

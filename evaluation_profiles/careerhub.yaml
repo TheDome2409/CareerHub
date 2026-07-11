@@ -1,0 +1,46 @@
+id: careerhub
+version: "1.0"
+title: CareerHub Human Review
+description: Human review profile for career matching and application-related outputs.
+criteria:
+  - id: factual_correctness
+    label: Factual Correctness
+    description: Claims are supported by the provided input.
+    min_score: 0
+    max_score: 10
+  - id: hallucination_risk
+    label: Hallucination Risk
+    description: Output avoids invented facts, roles, certifications or numbers.
+    min_score: 0
+    max_score: 10
+  - id: completeness
+    label: Completeness
+    description: Output covers the relevant parts of the task.
+    min_score: 0
+    max_score: 10
+  - id: structure
+    label: Structure
+    description: Output is organized and easy to review.
+    min_score: 0
+    max_score: 10
+  - id: language
+    label: Language
+    description: Language is clear, professional and appropriate.
+    min_score: 0
+    max_score: 10
+  - id: practical_usefulness
+    label: Practical Usefulness
+    description: Output is usable in a real workflow.
+    min_score: 0
+    max_score: 10
+  - id: explainability
+    label: Explainability
+    description: Reasoning and uncertainty are understandable.
+    min_score: 0
+    max_score: 10
+  - id: consistency
+    label: Consistency
+    description: Output is internally consistent.
+    min_score: 0
+    max_score: 10
+

@@ -1,0 +1,43 @@
+.venv/
+.venv*/
+__pycache__/
+.pytest_cache/
+.tmp/
+*.pyc
+.env
+
+# Personal profiles
+config/profile*.yaml
+
+# Keep the public-safe example profile
+!config/profile.example.yaml
+
+logs/
+
+# CareerHub runtime data
+data/review_queue.json
+data/companyhub.db
+data/recommendation_snapshots.json
+data/recommendation_outcomes.json
+data/global_skill_candidates.json
+data/company_profiles/*
+!data/company_profiles/example_technologies.json
+!data/company_profiles/xox.json
+data/jobs.json
+data/jobs_rss.xml
+data/*.db
+data/*.sqlite
+data/*.sqlite3
+exports/
+output/
+uploads/
+profiles/
+applications/
+src/jobagent/test.pdf
+benchmarks/outputs/
+benchmarks/reports/
+benchmarks/archive/
+*.duckdb
+reviews/
+*.log
+.aider*

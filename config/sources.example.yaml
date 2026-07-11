@@ -1,0 +1,26 @@
+sources:
+  - type: json
+    enabled: false
+    path: data/jobs.json
+
+  - type: rss
+    enabled: false
+    url: data/jobs_rss.xml
+    default_company: RSS Test GmbH
+    default_work_model: remote
+  - type: rss
+    enabled: true
+    url: https://www.backinjob.de/rss/jobs_it_telekommunikation.xml
+    default_company: BackInJob
+    default_work_model: unknown
+  - type: bundesagentur
+    enabled: true
+    query: "IT Projektleiter"
+    location: "Deutschland"
+    max_results: 50
+    published_since_days: 90
+
+  - type: remotive
+    enabled: true
+    query: "project manager"
+    max_results: 30

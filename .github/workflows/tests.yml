@@ -1,0 +1,37 @@
+﻿name: tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          python -m pip install -r requirements.txt
+
+      - name: Run tests
+        env:
+          PYTHONPATH: src;.
+        run: python -m pytest
+
+      - name: Run documentation smoke tests
+        env:
+          PYTHONPATH: src;.
+        run: python -m pytest test_openllmbench_docs.py -q
+
+      - name: Compile source
+        env:
+          PYTHONPATH: src;.
+        run: python -m compileall -q src

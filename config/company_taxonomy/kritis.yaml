@@ -1,0 +1,86 @@
+concepts:
+  Critical Infrastructure:
+    concept_type: kritis
+    aliases:
+      - KRITIS
+      - kritis
+      - kritische Infrastruktur
+      - kritische infrastruktur
+      - critical infrastructure
+      - Infrastruktur
+      - infrastruktur
+      - Netzinfrastruktur
+      - netzinfrastruktur
+      - digitale Infrastruktur
+      - digitale infrastruktur
+  Transmission Grid:
+    concept_type: infrastructure
+    aliases:
+      - Uebertragungsnetz
+      - Übertragungsnetz
+      - uebertragungsnetz
+      - übertragungsnetz
+      - Stromnetz
+      - stromnetz
+      - Energienetz
+      - energienetz
+      - transmission grid
+      - power grid
+      - high voltage grid
+  Distribution Grid:
+    concept_type: infrastructure
+    aliases:
+      - Verteilnetz
+      - verteilnetz
+      - distribution grid
+      - distribution network
+      - regional grid
+  Energy Infrastructure:
+    concept_type: infrastructure
+    aliases:
+      - Energie
+      - energie
+      - Energiewende
+      - energiewende
+      - Netz
+      - netz
+      - Grid
+      - grid
+      - energy infrastructure
+      - energy grid
+  Rail Infrastructure:
+    concept_type: infrastructure
+    aliases:
+      - Bahn
+      - bahn
+      - Schiene
+      - schiene
+      - Eisenbahn
+      - eisenbahn
+      - Schienenverkehr
+      - schienenverkehr
+      - Bahninfrastruktur
+      - bahninfrastruktur
+      - Eisenbahninfrastruktur
+      - Schienennetz
+      - rail
+      - railway
+      - rail infrastructure
+      - railway infrastructure
+  Telecommunications Infrastructure:
+    concept_type: infrastructure
+    aliases:
+      - Telekommunikation
+      - telekommunikation
+      - Netzausbau
+      - netzausbau
+      - Glasfaser
+      - glasfaser
+      - fiber
+      - fibre
+      - broadband
+      - Breitband
+      - breitband
+      - mobile network
+      - Mobilfunknetz
+      - mobilfunknetz

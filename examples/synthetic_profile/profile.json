@@ -1,0 +1,44 @@
+{
+  "name": "Alex Beispiel",
+  "headline": "IT Project Coordinator for digital operations",
+  "summary": "Synthetic profile for demonstrating CareerHub profile analysis and matching workflows.",
+  "preferred_roles": [
+    "IT Project Coordinator",
+    "Digital Operations Coordinator"
+  ],
+  "skills": [
+    "project coordination",
+    "requirements clarification",
+    "process documentation",
+    "stakeholder communication",
+    "workflow analysis",
+    "cloud basics"
+  ],
+  "career_tags": [
+    "digitalization",
+    "process_improvement",
+    "coordination"
+  ],
+  "preferences": {
+    "salary_minimum": 60000,
+    "salary_target": 70000,
+    "salary_dream": 80000,
+    "work_model_preferred": [
+      "hybrid"
+    ],
+    "work_model_acceptable": [
+      "remote",
+      "hybrid"
+    ],
+    "exclusion_industries": [
+      "gambling"
+    ],
+    "exclusion_employment_models": [
+      "temporary_work"
+    ],
+    "exclusion_requirements": [
+      "security_clearance"
+    ]
+  },
+  "synthetic": true
+}

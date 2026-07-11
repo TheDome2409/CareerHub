@@ -1,0 +1,8 @@
+mission_weight: 25
+domain_weight: 25
+technology_weight: 15
+work_model_weight: 15
+kritis_weight: 10
+max_exclusion_penalty: 30
+neutral_score_without_profile: 50
+missing_work_model_penalty: 0

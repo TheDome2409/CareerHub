@@ -1,0 +1,249 @@
+suite_version: "1.0"
+task_set_version: "1.0"
+prompt_set_version: "1.0"
+
+tasks:
+  - id: careerhub_job_analysis
+    task_version: "1.0"
+    prompt_version: "1.0"
+    category: careerhub
+    title: Stellenanalyse
+    expected_output_type: structured_analysis
+    evaluation_hints:
+      - Extrahiert Anforderungen, Risiken und Match-Faktoren.
+      - Bleibt faktennah zur Stellenbeschreibung.
+    prompt: |
+      Analysiere die folgende Stellenanzeige für CareerHub.
+      Gib strukturierte Abschnitte aus: Kernrolle, Muss-Anforderungen,
+      Kann-Anforderungen, Risiken, Skill-Match-Hinweise, offene Fragen.
+
+      Stelle:
+      Senior IT-Projektmanager für digitale Infrastruktur, hybride Arbeit,
+      Stakeholder-Kommunikation, Prozessoptimierung, Cloud-Projekte,
+      Lieferantensteuerung und Einführung KI-gestützter Werkzeuge.
+
+  - id: careerhub_cover_letter
+    task_version: "1.0"
+    prompt_version: "1.0"
+    category: careerhub
+    title: Anschreiben-Entwurf
+    expected_output_type: cover_letter_draft
+    evaluation_hints:
+      - Keine erfundenen Qualifikationen.
+      - Professioneller, konkreter Ton.
+    prompt: |
+      Erstelle einen kurzen Anschreiben-Entwurf auf Deutsch.
+      Fakten: Kandidat mit Erfahrung in IT-Projektmanagement,
+      Business-IT-Schnittstelle, Digitalisierung, EDI, ERP, Prozessanalyse
+      und CareerHub als eigenem KI-gestütztem Produktprototyp.
+      Zielunternehmen: Venture Builder mit Fokus digitale Geschäftsmodelle.
+
+  - id: careerhub_cv_prioritization
+    task_version: "1.0"
+    prompt_version: "1.0"
+    category: careerhub
+    title: CV-Priorisierung
+    expected_output_type: prioritized_bullets
+    evaluation_hints:
+      - Priorisiert relevante Stationen.
+      - Trennt konkrete Erfahrung von Vermutung.
+    prompt: |
+      Priorisiere folgende CV-Informationen für eine Bewerbung im Bereich
+      digitale Produktentwicklung: IT-Projektmanagement, EDI, ERP,
+      Dienstleisterkoordination, Entscheidungsvorlagen,
+      Wirtschaftlichkeitsbetrachtungen, CareerHub-Prototyp,
+      Infrastruktur-Betrieb, Support.
+
+  - id: careerhub_portfolio_selection
+    task_version: "1.0"
+    prompt_version: "1.0"
+    category: careerhub
+    title: Projektportfolio-Auswahl
+    expected_output_type: project_selection
+    evaluation_hints:
+      - Wählt passende Projekte aus.
+      - Begründet die Auswahl nachvollziehbar.
+    prompt: |
+      Wähle aus diesen Projekten die besten drei für ein Company-Match
+      mit einem digitalen Venture Builder: CareerHub, EDI-Anbindung,
+      ERP-Prozessanalyse, Office-Migration, Lagerdrucker-Rollout,
+      Netzwerksegmentierung. Begründe kurz.
+
+  - id: careerhub_explainability
+    task_version: "1.0"
+    prompt_version: "1.0"
+    category: careerhub
+    title: Explainability
+    expected_output_type: explanation
+    evaluation_hints:
+      - Erklärt Scores verständlich.
+      - Verschweigt Unsicherheiten nicht.
+    prompt: |
+      Erkläre einem Nutzer verständlich, warum ein Company-Match
+      hoch ausfällt, obwohl der direkte Skill-Match nur mittel ist.
+      Beziehe Kompetenzen, Mission-Fit und strategische Passung ein.
+
+  - id: coding_refactor
+    task_version: "1.0"
+    prompt_version: "1.0"
+    category: coding
+    title: Kleine Refactoring-Aufgabe
+    expected_output_type: code_plan
+    evaluation_hints:
+      - Kleine, sichere Schritte.
+      - Keine unnötige Architektur.
+    prompt: |
+      Refactore gedanklich eine Funktion, die CSV-Zeilen und JSON-Daten
+      gleichzeitig verarbeitet. Ziel: klarere Parser-Grenzen, gleiche API,
+      keine neuen Dependencies. Gib Plan und Beispielcode.
+
+  - id: coding_bugfix
+    task_version: "1.0"
+    prompt_version: "1.0"
+    category: coding
+    title: Bugfix-Aufgabe
+    expected_output_type: debugging_steps
+    evaluation_hints:
+      - Identifiziert Ursache.
+      - Liefert minimalen Fix.
+    prompt: |
+      Ein Streamlit-Widget crasht, weil st.session_state nach der
+      Widget-Erzeugung geändert wird. Erkläre Ursache und minimalen Fix
+      mit Pending-State und rerun.
+
+  - id: coding_pydantic_model
+    task_version: "1.0"
+    prompt_version: "1.0"
+    category: coding
+    title: Pydantic-Modell erweitern
+    expected_output_type: python_code
+    evaluation_hints:
+      - Pydantic v2 kompatibel.
+      - Defaults robust.
+    prompt: |
+      Erweitere ein Pydantic-Modell CompanyProfile um optionale Felder
+      industries, technologies, work_models und confidence. Schreibe
+      kompakten Python-Code mit sinnvollen Defaults.
+
+  - id: coding_tests
+    task_version: "1.0"
+    prompt_version: "1.0"
+    category: coding
+    title: Tests schreiben
+    expected_output_type: pytest_examples
+    evaluation_hints:
+      - Testet Verhalten, nicht Implementierungsdetails.
+      - Keine echten Netzwerkaufrufe.
+    prompt: |
+      Schreibe pytest-Tests für einen Ollama-Client, ohne echte
+      Netzwerkaufrufe. Teste erfolgreichen JSON-Response, Timeout und
+      HTTP-Fehler.
+
+  - id: analysis_complex_text
+    task_version: "1.0"
+    prompt_version: "1.0"
+    category: analysis
+    title: Komplexe Textanalyse
+    expected_output_type: structured_analysis
+    evaluation_hints:
+      - Saubere Struktur.
+      - Trennt Fakten und Interpretation.
+    prompt: |
+      Analysiere diesen Text: Ein Unternehmen investiert in KI,
+      reduziert gleichzeitig IT-Budget, sucht mehr Eigenentwicklung,
+      lagert aber kritische Systeme weiter aus. Welche Spannungen,
+      Chancen und Risiken entstehen?
+
+  - id: analysis_risk
+    task_version: "1.0"
+    prompt_version: "1.0"
+    category: analysis
+    title: Risikobewertung
+    expected_output_type: risk_register
+    evaluation_hints:
+      - Risiken priorisieren.
+      - Gegenmaßnahmen nennen.
+    prompt: |
+      Erstelle eine Risikobewertung für ein lokales KI-Tool, das
+      Bewerbungsunterlagen analysiert. Fokus: Datenschutz,
+      Halluzinationen, Nachvollziehbarkeit, Datenpersistenz.
+
+  - id: analysis_options
+    task_version: "1.0"
+    prompt_version: "1.0"
+    category: analysis
+    title: Vergleich zweier Optionen
+    expected_output_type: comparison
+    evaluation_hints:
+      - Klare Entscheidungskriterien.
+      - Pragmatische Empfehlung.
+    prompt: |
+      Vergleiche zwei Ansätze: A) Company-Knowledge nur manuell pflegen,
+      B) öffentliche Quellen abrufen und Evidence extrahieren.
+      Bewerte Aufwand, Risiko, Qualität und Skalierbarkeit.
+
+  - id: analysis_cause_effect
+    task_version: "1.0"
+    prompt_version: "1.0"
+    category: analysis
+    title: Ursachen/Wirkungsanalyse
+    expected_output_type: cause_effect_analysis
+    evaluation_hints:
+      - Kausalkette verständlich.
+      - Keine vorschnellen Schlüsse.
+    prompt: |
+      Eine Ranking-Engine liefert ähnliche Jobs für sehr unterschiedliche
+      Profile. Analysiere mögliche Ursachen und Gegenmaßnahmen.
+
+  - id: docs_readme
+    task_version: "1.0"
+    prompt_version: "1.0"
+    category: documentation
+    title: README verbessern
+    expected_output_type: markdown
+    evaluation_hints:
+      - Praktisch nutzbar.
+      - Klarer Quickstart.
+    prompt: |
+      Schreibe einen README-Abschnitt für ein lokales Benchmark-Tool,
+      das Ollama-Modelle nach Modell gruppiert testet.
+
+  - id: docs_architecture
+    task_version: "1.0"
+    prompt_version: "1.0"
+    category: documentation
+    title: Technische Architektur erklären
+    expected_output_type: architecture_notes
+    evaluation_hints:
+      - Verständlich für Entwickler.
+      - Benennt Grenzen.
+    prompt: |
+      Erkläre die Architektur einer Pipeline:
+      Source -> Fetch -> Document -> Clean Text -> Evidence -> Knowledge Draft.
+
+  - id: docs_user_guide
+    task_version: "1.0"
+    prompt_version: "1.0"
+    category: documentation
+    title: Nutzeranleitung schreiben
+    expected_output_type: user_guide
+    evaluation_hints:
+      - Schrittweise.
+      - Ohne technische Überladung.
+    prompt: |
+      Schreibe eine kurze Nutzeranleitung für den Export einer
+      Bewerbungsmappe als finale PDF-Datei.
+
+  - id: docs_changelog
+    task_version: "1.0"
+    prompt_version: "1.0"
+    category: documentation
+    title: Changelog formulieren
+    expected_output_type: changelog
+    evaluation_hints:
+      - Knapp und nachvollziehbar.
+      - Gruppiert nach Feature/Fix.
+    prompt: |
+      Formuliere einen Changelog-Eintrag für:
+      Mission Profile, Company Knowledge Draft Reviewer,
+      Evidence Extraction Fallback und lokale LLM-Benchmarks.

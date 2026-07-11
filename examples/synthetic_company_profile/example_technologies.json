@@ -1,0 +1,36 @@
+{
+  "name": "Example Technologies GmbH",
+  "description": "A fictional company for demonstrating CompanyHub and Company Match workflows.",
+  "industries": [
+    "software services",
+    "business digitalization"
+  ],
+  "work_models": [
+    "hybrid",
+    "remote"
+  ],
+  "detected_skills": [
+    "project coordination",
+    "process documentation",
+    "workflow analysis"
+  ],
+  "detected_competencies": [
+    "coordination",
+    "communication",
+    "documentation",
+    "process_improvement"
+  ],
+  "possible_use_cases": [
+    "internal digital operations",
+    "process documentation",
+    "workflow improvement"
+  ],
+  "company_intel": {
+    "mission": "Synthetic mission statement for demo purposes only.",
+    "innovation_areas": [
+      "workflow automation",
+      "digital operations"
+    ],
+    "synthetic": true
+  }
+}

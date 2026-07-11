@@ -1,0 +1,140 @@
+digitalization:
+  label: "💡 Digitalisierung"
+  keywords:
+    - digitalisierung
+    - einführung
+    - it-systeme
+    - prozessoptimierung
+    - systeme
+
+project_responsibility:
+  label: "📋 Projektverantwortung"
+  keywords:
+    - projekt
+    - projekte
+    - planung
+    - umsetzung
+    - projektverantwortung
+    - projektleitung
+
+leadership:
+  label: "👥 Leadership"
+  keywords:
+    - führung
+    - geschäftsführung
+    - koordination
+    - teamkoordination
+    - teamleitung
+    - leitung
+
+stakeholder_management:
+  label: "🤝 Stakeholder Management"
+  keywords:
+    - stakeholder
+    - geschäftsführung
+    - fachbereich
+    - fachbereiche
+    - schnittstelle
+    - abstimmung
+
+vendor_management:
+  label: "🏢 Dienstleistersteuerung"
+  keywords:
+    - dienstleister
+    - lieferant
+    - lieferanten
+    - provider
+    - externe partner
+
+change_management:
+  label: "🔄 Change Management"
+  keywords:
+    - change management
+    - veränderung
+    - einführung
+    - dokumentation
+    - fehleranalyse
+    - weiterentwicklung
+
+automation:
+  label: "⚙️ Automatisierung"
+  keywords:
+    - automatisierung
+    - automation
+    - optimierung
+    - prozessautomatisierung
+    - weiterentwicklung
+
+cloud:
+  label: "☁️ Cloud"
+  keywords:
+    - cloud
+    - exchange online
+    - microsoft 365
+    - office 365
+    - azure
+
+security:
+  label: "🔒 Security"
+  keywords:
+    - security
+    - datensicherheit
+    - firewall
+    - firewalls
+    - vpn
+    - sicherheit
+    - nis2
+    - nis 2
+
+consulting:
+  label: "🧑‍💼 Consulting"
+  keywords:
+    - consulting
+    - beratung
+    - unterstützung
+    - entscheidungsvorlage
+    - analyse
+
+architecture:
+  label: "🏗 Infrastruktur / Architektur"
+  keywords:
+    - infrastruktur
+    - architektur
+    - netzwerk
+    - server
+    - systemintegration
+    - virtualisierung
+
+data:
+  label: "📊 Data / EDI"
+  keywords:
+    - data
+    - daten
+    - edi
+    - electronic data interchange
+    - schnittstellen
+
+innovation:
+  label: "🧪 Innovation"
+  keywords:
+    - innovation
+    - entwicklung
+    - forschung
+    - weiterentwicklung
+
+social_engagement:
+  label: "🤝 Soziales Engagement"
+  keywords:
+    - ehrenamt
+    - ehrenamtlich
+    - feuerwehr
+    - freiwillige feuerwehr
+    - oberfeuerwehrmann
+    - rettungshelfer
+    - erste hilfe
+    - ausbilder
+    - breitenausbilder
+    - ausbildereignung
+    - aevo
+    - jugendfeuerwehr
+    - schulsanitätsdienst

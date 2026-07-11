@@ -1,0 +1,12 @@
+id: analysis
+name: Analysis Benchmark Dataset
+description: Analytical reasoning tasks for risks, tradeoffs and causal structure.
+version:
+  semantic_version: 0.1.0
+  hash: ""
+  created_at: "2026-07-09T00:00:00+00:00"
+license: TBD
+task_count: 1
+metadata:
+  status: foundation
+

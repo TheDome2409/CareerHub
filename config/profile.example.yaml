@@ -1,0 +1,47 @@
+profile:
+  name: "Max Mustermann"
+
+  location:
+    city: "Berlin"
+    country: "DE"
+
+  work_model:
+    preferred:
+      - remote
+      - hybrid
+
+    public_transport_required: false
+
+  salary:
+    minimum: 60000
+    target: 80000
+    dream: 100000
+
+  preferred_roles:
+    - IT Project Manager
+    - Technical Consultant
+
+  skills:
+    - project_management
+    - digitalization
+    - automation
+
+  career_goals:
+    short_term:
+      - project_management
+
+    mid_term:
+      - leadership
+
+    long_term:
+      - head_of
+
+  exclusions:
+    industries:
+      - banking
+
+    employment_models:
+      - temporary_work
+
+    requirements:
+      - security_clearance
