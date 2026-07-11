@@ -19,6 +19,10 @@ Name and trademark review is still recommended before final publication.
 
 Local-first Python and Streamlit prototype for explainable career, job and company matching with human-reviewed skills, application-package generation and optional Ollama support.
 
+Alternative product-oriented description:
+
+Local-first career assistant prototype showing explainable matching, human-reviewed skill governance, CompanyHub foundations and product decision records for an AI-assisted workflow.
+
 ## Suggested Topics
 
 - `python`
@@ -46,6 +50,16 @@ Local-first Python and Streamlit prototype for explainable career, job and compa
 - Discussions: optional; leave disabled initially unless active community support
   is intended.
 - Topics: use the topics above, adjusting if GitHub rejects a topic.
+
+## Product Documentation To Highlight
+
+- Product Vision: `docs/product-vision.md`
+- Product Journey: `docs/product-journey.md`
+- Product Owner Case Study: `docs/product-owner-case-study.md`
+- ADRs: `docs/adr/`
+
+These documents are intended to explain product thinking, prioritization and
+governance. They should not be presented as personal advertising copy.
 
 ## Social Preview
 

@@ -123,7 +123,7 @@ profile fit workflows.
 - Purpose: framework for evaluating language models on many benchmark tasks.
 - License: MIT, according to the GitHub repository metadata.
 - Source: <https://github.com/EleutherAI/lm-evaluation-harness>
-- Overlap: model benchmarking, reproducibility and task-based evaluation.
+- Overlap: model benchmarking, reproducibility and task oriented evaluation.
 - Difference: CareerHub's benchmark runner and OpenLLMBench foundation focus on
   local Ollama models, portfolio-specific tasks, telemetry and future human
   evaluation. They are experimental foundations, not replacements for mature

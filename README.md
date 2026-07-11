@@ -295,6 +295,18 @@ CareerHub overlaps with resume builders, resume/job matchers, skill taxonomies,
 local LLM tools and model benchmark frameworks. The differences and influences
 are documented in [Related Work](docs/related-work.md).
 
+## Product and Architecture Decisions
+
+CareerHub is documented not only as code, but also as a product-development
+case. The product notes explain why the project prioritized local processing,
+human review, persistent skill knowledge and a clean public release boundary.
+
+- [Product Vision](docs/product-vision.md)
+- [Product Journey](docs/product-journey.md)
+- [Product Owner Case Study](docs/product-owner-case-study.md)
+- [Product Backlog](docs/product-backlog.md)
+- [Architecture Decision Records](docs/adr/)
+
 ## Contributing
 
 Contributions are welcome after public repository creation. Please read:
