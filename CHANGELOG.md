@@ -24,3 +24,4 @@ and will use semantic versioning once the public API stabilizes.
 
 - Initial public source snapshot prepared from the private CareerHub development repository.
 - Public documentation, AGPLv3 license, support, security and due-diligence notes.
+- Release notes: [docs/releases/v0.1.0.md](docs/releases/v0.1.0.md).

@@ -1,160 +1,284 @@
 # CareerHub
 
-CareerHub is a local-first Python and Streamlit prototype for structured career matching, job analysis and application package generation.
+CareerHub is a local-first Python and Streamlit prototype for explainable career
+matching, job analysis, company intelligence foundations and application-package
+generation.
 
-The project combines deterministic rules, configurable scoring, document processing and optional local LLM support through Ollama. It is designed as a portfolio-grade prototype: useful for local experimentation, transparent about its limits, and careful with sensitive application data.
+It combines deterministic scoring, human-reviewed skill governance, document
+processing, optional local LLM support through Ollama and synthetic demo data.
+The project is published as a portfolio-grade open-source release: transparent,
+test-backed and careful about privacy, while still clearly marked as a prototype.
 
-## Status
+## Project Status
 
-CareerHub is an actively developed local prototype.
+CareerHub v0.1.0 is an **Initial Public Portfolio Release**.
 
-Status terms used in this documentation:
+Status terms used in this repository:
 
-- **Implemented**: available in code and covered by at least basic tests or UI/service integration.
-- **Partially implemented**: functional pieces exist, but the feature is incomplete, heuristic or not fully integrated.
-- **Experimental**: available for exploration, but not production-ready.
-- **Planned**: described as a near-term roadmap item.
-- **Concept**: architectural idea or long-term direction.
+- **Implemented**: available in code and covered by tests, UI integration or
+  service-level smoke tests.
+- **Partially implemented**: functional pieces exist, but the feature depends on
+  local tools, incomplete integration or manual review.
+- **Experimental**: available for exploration, not stable product behavior.
+- **Planned**: intended near-term work.
+- **Concept**: architecture direction or long-term idea.
 
+CareerHub is not a production recruiting platform, applicant tracking system,
+cloud service or legal qualification engine. Human review is required for skill
+decisions, LLM-generated text and application documents.
 
-## License
+## Key Capabilities
 
-CareerHub is licensed under the GNU Affero General Public License v3.0. See [`LICENSE`](LICENSE) for the full license text. Additional licensing notes are available in [`docs/licensing.md`](docs/licensing.md).
+### Implemented
 
-## Main Capabilities
+- Streamlit UI for profile review, job matching, CompanyHub and application
+  package workflows.
+- Profile CSV import/export for skills and GUI-maintained preferences.
+- Salary, work-model and hard-exclusion preferences.
+- Job loading from configured JSON, RSS, Bundesagentur and Remotive sources.
+- Profile-aware job queries for supported sources.
+- Explainable job scoring with role, work model, salary, career, employer,
+  skill, competency and role-mismatch components.
+- Unknown skill detection, canonicalization, candidate typing and JSON review
+  queue persistence.
+- Persistent SQLite Skill Registry: human-approved candidates can create skills,
+  merge aliases or surface type conflicts.
+- CompanyHub foundations: tracked companies, sources, fetched documents,
+  evidence extraction, canonical concepts, knowledge drafts and pipeline
+  inspection.
+- Company profile matching dimensions for mission, domains, technologies, work
+  models, KRITIS affinity and exclusions.
+- HTML and ZIP application package export.
+- Synthetic public-safe profile, job and company examples.
 
-### CareerHub Core
+### Partially Implemented
 
-- **Implemented**: Streamlit UI with profile, job matching, CompanyHub and application package tabs.
-- **Implemented**: profile CSV import/export for skills and profile preferences.
-- **Implemented**: profile preferences for salary targets, work models and hard exclusions.
-- **Implemented**: job loading from configured JSON, RSS, Bundesagentur and Remotive sources.
-- **Implemented**: profile-aware job search queries for sources that support search terms.
-- **Implemented**: job scoring with role, work model, salary, career, employer, skill, competency and role-mismatch components.
-- **Implemented**: hard exclusion handling for selected industries, employment models and requirements.
-- **Partially implemented**: OCR and PDF text extraction. PDF text extraction is implemented; OCR uses Tesseract and Poppler from PATH or the `TESSERACT_CMD` and `POPPLER_PATH` environment variables.
-- **Implemented**: unknown skill candidate detection, canonicalization, candidate typing and review queue persistence.
-- **Implemented**: persistent SQLite Skill Registry. Approved review candidates are inserted or merged into the registry and become available to matching immediately; YAML remains a seed/import source.
-- **Implemented**: local LLM calls through Ollama for candidate evaluation and application text generation, where the required local model and Python package are available.
+- OCR and scanned-PDF workflows: PDF text extraction is implemented; OCR depends
+  on local Tesseract and Poppler setup.
+- Final PDF application package: available only when a real HTML-to-PDF renderer
+  such as wkhtmltopdf/pdfkit or WeasyPrint is installed.
+- Company initiative application flow: functional prototype with strict prompts
+  and human-review expectation.
 
-### Application Package Generation
+### Experimental / Foundation
 
-- **Implemented**: cover-letter generation for a selected job through Ollama.
-- **Implemented**: context-aware resume text generation through Ollama.
-- **Implemented**: company initiative letter generation from a selected Company Match.
-- **Implemented**: HTML application package generation.
-- **Implemented**: ZIP export containing HTML and selected attachments.
-- **Partially implemented**: final PDF package generation. The system can render HTML to PDF when WeasyPrint or wkhtmltopdf/pdfkit is available, then merge PDF/image attachments through pypdf. Without a real HTML-to-PDF renderer it does not offer a full final PDF.
-- **Implemented**: attachment display-title cleanup and attachment overview rendering for application packages.
+- Local Ollama benchmark runner under `careerhub/`.
+- OpenLLMBench package skeleton for future standalone benchmark work.
+- Company knowledge LLM review drafts.
+- Company concept canonicalization seed taxonomy.
 
-### CompanyHub
+## Architecture Overview
 
-- **Implemented**: SQLite-backed company repository.
-- **Implemented**: recommended company seeds and tracking of observed companies.
-- **Implemented**: company sources, manual source fetching and raw document storage.
-- **Implemented**: unified document processing foundation for HTML, PDF, DOCX, Markdown and text.
-- **Implemented**: rule-based company evidence extraction with fallback evidence for real-world HTML pages.
-- **Implemented**: company knowledge draft builder from evidence and canonical company concepts.
-- **Implemented**: optional Ollama-based knowledge draft review. Reviewed drafts are saved as drafts, not automatically promoted as trusted company knowledge.
-- **Implemented**: CompanyHub pipeline inspector for sources, documents, clean text lengths, evidence and knowledge drafts.
-- **Implemented**: company-to-profile match foundation using mission, domain, technology, work model, KRITIS and exclusion weights.
-- **Partially implemented**: older Company Match mode that aggregates already loaded jobs into company profiles and can generate initiative application context.
-- **Experimental**: manual Example Technologies example profile for demos and tests.
+```text
+Profile / job / company source
+        |
+        v
+Document loading and text extraction
+        |
+        v
+Rule-based extraction and optional local LLM assistance
+        |
+        +--> Human Review Queue
+        |        |
+        |        v
+        |   SQLite Skill Registry
+        |
+        v
+Scoring, matching, evidence or knowledge draft building
+        |
+        v
+Explainability in UI and optional application package export
+```
 
-### Benchmarking / OpenLLMBench
+Primary entry point:
 
-- **Experimental**: `careerhub/` contains a local Ollama benchmark runner with metadata, metrics, progress files, system health and archive foundations.
-- **Concept / Foundation**: `openllmbench/` contains the beginning of a standalone benchmarking framework. It is not yet the active CareerHub runtime.
+```text
+src/jobagent/ui/streamlit_app.py
+```
 
-## What CareerHub Is Not
+Main layers:
 
-CareerHub does not make final career decisions.
+- `src/jobagent/ui/` - Streamlit tabs and presentation logic.
+- `src/jobagent/services/` - scoring, document processing, skill workflows,
+  CompanyHub pipelines and exports.
+- `src/jobagent/repositories/` - JSON/YAML/SQLite repository adapters.
+- `src/jobagent/models/` - Pydantic and dataclass models.
+- `src/jobagent/sources/` - job source adapters.
+- `careerhub/` - experimental local benchmark runner.
+- `openllmbench/` - standalone benchmark framework foundation.
 
-It is not a recruiting platform, applicant tracking system, SaaS product or cloud service. It does not provide a production-ready crawler, scheduler, dashboard analytics product or legally binding qualification assessment.
+More detail: [Architecture](docs/architecture.md).
 
-LLM-generated content is treated as assistance. Human review remains required for application documents, skill decisions and company knowledge.
+## Screenshots / Demo
 
-## Local Setup
+No screenshots are included yet. A privacy-safe screenshot plan is available in
+[`docs/screenshots/README.md`](docs/screenshots/README.md). Screenshots should
+only be added after review with synthetic data.
 
-Install Python dependencies:
+Demo flow: [docs/demo.md](docs/demo.md).
+
+## Quick Start
+
+Install dependencies:
 
 ```powershell
 python -m pip install -r requirements.txt
 ```
 
-Start the Streamlit app:
+Start the Streamlit app on Windows:
 
 ```powershell
 start_gui.bat
 ```
 
-or:
+Or start manually from the repository root:
 
 ```powershell
 set PYTHONPATH=%CD%\src
 python -m streamlit run src\jobagent\ui\streamlit_app.py
 ```
 
+For PowerShell:
+
+```powershell
+$env:PYTHONPATH = "src;."
+python -m streamlit run src\jobagent\ui\streamlit_app.py
+```
+
+## Local LLM Setup
+
+CareerHub can use Ollama for optional local LLM workflows:
+
+- unknown skill candidate evaluation
+- job/application text drafting
+- company knowledge draft review
+- local benchmark experiments
+
+Install Ollama separately and pull a local model that you are licensed to use.
+The repository does not distribute model weights. Model licenses vary by model
+and tag.
+
+If Ollama is unavailable, deterministic parts of CareerHub should still be
+usable; LLM-backed actions show fallback or error messages.
+
+## OCR And PDF Requirements
+
+Implemented:
+
+- PDF text extraction through `pypdf`.
+- optional OCR adapter through `pytesseract` and `pdf2image`.
+- PDF merge/export support through `pypdf`.
+
 Optional local tools:
 
-- Ollama for local LLM calls.
-- A model such as `qwen3:30b` if using the default LLM paths.
-- wkhtmltopdf or WeasyPrint for automatic full PDF export.
-- Tesseract and Poppler for OCR of scanned PDFs.
+- Tesseract OCR
+- Poppler
+- wkhtmltopdf or WeasyPrint for full PDF application package rendering
+
+Without a real HTML-to-PDF renderer, CareerHub does not offer a full final PDF
+package and falls back to HTML/ZIP export paths.
+
+## Synthetic Demo Data
+
+Public-safe examples are included under:
+
+- `examples/synthetic_profile/`
+- `examples/synthetic_job_posting/`
+- `examples/synthetic_company_profile/`
+- `data/company_profiles/example_technologies.json`
+- `data/company_profiles/xox.json`
+
+These examples are synthetic and should not be treated as real application or
+employer data.
 
 ## Configuration
 
-Important configuration files:
+Important public-safe configuration files:
 
-- `config/sources.yaml`: active job source configuration.
-- `config/sources.example.yaml`: example source configuration.
-- `config/profile.example.yaml`: public-safe profile example.
-- `config/scoring.example.yaml`: job scoring example.
-- `config/company_match_scoring.yaml`: company match scoring weights.
-- `config/company_matching/company_matching.yaml`: CompanyHub profile-match weights.
-- `config/taxonomy/*.yaml`: repository-backed taxonomy inputs.
-- `config/company_taxonomy/*.yaml`: seed taxonomy for company concept canonicalization.
-- `.env.example`: public-safe template for local environment variables such as optional OCR paths and source API identifiers.
+- `config/sources.example.yaml`
+- `config/profile.example.yaml`
+- `config/scoring.example.yaml`
+- `config/company_match_scoring.yaml`
+- `config/company_matching/company_matching.yaml`
+- `config/taxonomy/*.yaml`
+- `config/company_taxonomy/*.yaml`
+- `.env.example`
 
-Runtime skill knowledge is stored in SQLite through the Skill Registry tables. `config/skill_taxonomy.yaml` and taxonomy YAML files are treated as seeds, examples or import/export material, not as the only runtime source of known skills.
+Runtime and private files are intentionally ignored, including review queues,
+runtime databases, uploads, generated exports, logs and benchmark outputs.
 
-Personal profile files and runtime data should not be committed.
+For Bundesagentur job search, set `BUNDESAGENTUR_API_KEY` locally. The
+repository does not ship a real API key.
 
-For Bundesagentur job search, configure `BUNDESAGENTUR_API_KEY` locally. The repository intentionally does not ship a concrete API key.
+## Test Instructions
 
-## Data And Privacy
+Run the full suite:
 
-Runtime data currently uses local JSON and SQLite files under `data/`. This can include review queue entries, snapshots, outcomes and company documents. Treat these as private by default.
+```powershell
+$env:PYTHONPATH = "src;."
+python -m pytest
+```
 
-Before publishing the repository, review:
+Focused examples:
 
-- `data/`
-- `logs/`
-- `benchmarks/outputs/`
-- generated application packages
-- screenshots
-- tests containing real names or application material
+```powershell
+python -m pytest test_scoring.py test_role_mismatch_penalty.py test_skill_profile_io.py
+python -m pytest test_company_knowledge_builder.py test_company_profile_match_service.py
+python -m pytest test_application_pdf_service.py test_company_application_package.py
+python -m pytest test_openllmbench_docs.py -q
+```
 
-See [docs/security-and-privacy.md](docs/security-and-privacy.md) for details.
+The v0.1.0 public candidate was checked with:
+
+- `324 passed, 3 skipped, 0 failed`
+- documentation smoke: `3 passed`
+- `compileall -q src`: successful
+
+The skipped tests are for optional DuckDB benchmark archive support when DuckDB
+is not installed.
+
+## Privacy And Responsible AI
+
+CareerHub is local-first by design. It does not require a cloud LLM service for
+core deterministic workflows.
+
+Important privacy rules:
+
+- Do not commit real resumes, applications, certificates or generated letters.
+- Do not commit runtime databases, review queues, uploads, logs or benchmark
+  outputs.
+- Treat local company documents as private unless they are public-safe.
+- Review every LLM-generated application document before use.
+- Verify local model licenses before use.
+
+See:
+
+- [Security and Privacy](docs/security-and-privacy.md)
+- [Open-Source Due Diligence](docs/open-source-due-diligence.md)
+- [Third-Party Notices](THIRD_PARTY_NOTICES.md)
 
 ## Documentation
 
-- [Architecture](docs/architecture.md)
 - [Features](docs/features.md)
-- [Security and Privacy](docs/security-and-privacy.md)
+- [Architecture](docs/architecture.md)
 - [Demo](docs/demo.md)
 - [Roadmap](docs/roadmap.md)
 - [Portfolio Summary](docs/portfolio-summary.md)
-- [Documentation Audit](docs/documentation-audit.md)
-- [Publication Readiness Audit](docs/publication-readiness-audit.md)
+- [Related Work](docs/related-work.md)
+- [Dependency License Inventory](docs/dependency-license-inventory.md)
+- [Licensing](docs/licensing.md)
+- [GitHub Release Profile](docs/github-release-profile.md)
+- [Initial GitHub Issues](docs/github-initial-issues.md)
+- [Release Notes v0.1.0](docs/releases/v0.1.0.md)
+- [Screenshot Plan](docs/screenshots/README.md)
 
-OpenLLMBench foundation documentation:
+OpenLLMBench foundation:
 
 - [OpenLLMBench Architecture Overview](docs/architecture/overview.md)
-- [OpenLLMBench Benchmark Pipeline](docs/architecture/benchmark_pipeline.md)
-- [OpenLLMBench Plugin Architecture](docs/architecture/plugin_architecture.md)
-- [OpenLLMBench Telemetry](docs/architecture/telemetry.md)
-- [OpenLLMBench Archive](docs/architecture/archive.md)
+- [Benchmark Pipeline](docs/architecture/benchmark_pipeline.md)
+- [Plugin Architecture](docs/architecture/plugin_architecture.md)
+- [Telemetry](docs/architecture/telemetry.md)
+- [Archive](docs/architecture/archive.md)
 - [Benchmark Suites](docs/benchmark_suites/README.md)
 - [Providers](docs/providers/README.md)
 - [Create Benchmark Suite](docs/tutorials/create_benchmark_suite.md)
@@ -164,18 +288,27 @@ OpenLLMBench foundation documentation:
 - [Create Judge](docs/tutorials/create_judge.md)
 - [OpenLLMBench Philosophy](docs/philosophy.md)
 - [OpenLLMBench Roadmap](ROADMAP.md)
-- [Contributing](CONTRIBUTING.md)
-- [License](LICENSE)
-- [Code of Conduct](CODE_OF_CONDUCT.md)
 
-## Tests
+## Related Work
 
-Run focused tests:
+CareerHub overlaps with resume builders, resume/job matchers, skill taxonomies,
+local LLM tools and model benchmark frameworks. The differences and influences
+are documented in [Related Work](docs/related-work.md).
 
-```powershell
-python -m pytest test_scoring.py test_role_mismatch_penalty.py test_skill_profile_io.py
-python -m pytest test_company_knowledge_builder.py test_company_profile_match_service.py
-python -m pytest test_application_pdf_service.py test_company_application_package.py
-```
+## Contributing
 
-Some tests are foundation or smoke tests. Passing tests are evidence of expected behavior, not proof of production readiness.
+Contributions are welcome after public repository creation. Please read:
+
+- [CONTRIBUTING.md](CONTRIBUTING.md)
+- [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
+- [SECURITY.md](SECURITY.md)
+- [SUPPORT.md](SUPPORT.md)
+
+## License
+
+CareerHub is licensed under the GNU Affero General Public License v3.0. See
+[`LICENSE`](LICENSE) for the full text.
+
+Third-party packages and optional local tools keep their own licenses. See
+[`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) and
+[`docs/dependency-license-inventory.md`](docs/dependency-license-inventory.md).

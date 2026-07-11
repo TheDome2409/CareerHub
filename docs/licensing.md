@@ -22,6 +22,8 @@ the license terms carefully.
 ## Third-Party Dependencies
 
 Third-party Python packages, tools and optional local runtimes keep their own
-licenses. See `THIRD_PARTY_NOTICES.md` for the current due-diligence status.
+licenses. See [`../THIRD_PARTY_NOTICES.md`](../THIRD_PARTY_NOTICES.md) and
+[`dependency-license-inventory.md`](dependency-license-inventory.md) for the
+current due-diligence status.
 
 This document is not legal advice.

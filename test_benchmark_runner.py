@@ -1,4 +1,5 @@
 import json
+import tempfile
 from pathlib import Path
 
 from careerhub.benchmark_models import (
@@ -311,8 +312,10 @@ def test_resume_skips_existing_outputs(tmp_path):
     assert summary.records[0].metadata["resumed"] is True
 
 
-def test_git_metadata_outside_git_repo_does_not_crash(tmp_path):
-    metadata = git_metadata(tmp_path)
+def test_git_metadata_outside_git_repo_does_not_crash(tmp_path, monkeypatch):
+    monkeypatch.setenv("GIT_CEILING_DIRECTORIES", str(Path.cwd()))
+    with tempfile.TemporaryDirectory() as temp_dir:
+        metadata = git_metadata(Path(temp_dir))
 
     assert metadata.commit_hash is None
     assert metadata.dirty_state == "unknown"
