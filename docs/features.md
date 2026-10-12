@@ -16,7 +16,7 @@
 - HTML, DOCX, Markdown and text processing through the unified document processing service.
 - Export text normalization for application-package rendering.
 
-Status: **Partially implemented** because OCR requires local tools and hardcoded paths currently exist in helper code.
+Status: **Partially implemented** because OCR requires Tesseract, German language data and Poppler. Tool paths use environment overrides or PATH.
 
 ### Skill And Candidate Workflows
 
@@ -28,7 +28,7 @@ Status: **Partially implemented** because OCR requires local tools and hardcoded
 - Confidence values and source metadata.
 - Persistent JSON review queue.
 - Human status update for pending, approved and rejected candidates.
-- Persistent SQLite Skill Registry as the runtime source of known skills.
+- Persistent SQLite Skill Registry with registry-first lookup, YAML seed/keyword inputs and YAML fallback paths.
 - Human-approved review candidates can create a new skill, merge into an existing skill, add aliases or surface a type conflict for review.
 - Active registry skills and aliases are available immediately to skill canonicalization, unknown-skill detection and job/profile skill matching.
 - Idempotent seed migration from `config/skill_taxonomy.yaml` into the registry.
@@ -74,6 +74,7 @@ Status: **Implemented / Experimental**. Foundations are present, but no producti
 - ZIP export with attachments.
 - Full PDF package when a real HTML-to-PDF renderer is available.
 - PDF/image attachment merge into final PDF through `pypdf`.
+- Explicit failure naming an unreadable, empty or unsupported selected PDF attachment; no incomplete final PDF is offered as success.
 
 Status: **Partially implemented** because final PDF export depends on local renderer availability.
 

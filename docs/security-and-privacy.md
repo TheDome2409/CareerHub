@@ -4,7 +4,9 @@
 
 Privacy posture: **Partially implemented**
 
-CareerHub is designed for local processing, but the repository currently contains runtime-data paths and demo/test artifacts that must be reviewed before publication.
+CareerHub is designed for local processing. Runtime paths exist in code, but
+runtime databases, private documents and generated outputs are excluded from
+the public source snapshot. Local use can create sensitive files again.
 
 ## Local-First Design
 
@@ -29,15 +31,15 @@ Do not commit:
 
 ## Current Repository Risks
 
-Observed during the audit:
+Runtime risks (not a claim that these files are currently tracked):
 
 - `data/companyhub.db` is a runtime SQLite database.
 - `data/review_queue.json`, `data/recommendation_snapshots.json`, `data/recommendation_outcomes.json` and `data/global_skill_candidates.json` are runtime data.
-- `benchmarks/outputs/` contains full benchmark responses.
+- `benchmarks/outputs/` stores full benchmark responses when a benchmark runs.
 - `logs/` may contain LLM prompt or export debug details.
 - OCR configuration now uses `TESSERACT_CMD` and `POPPLER_PATH` instead of checked-in local paths. Keep real machine paths in local environment variables only.
 - Live source credentials or client identifiers should be configured through environment variables such as `BUNDESAGENTUR_API_KEY`, not committed as concrete values.
-- Some tests contain real-looking names and application-package examples. Review them before publishing.
+- Public tests/examples use synthetic application material; future fixtures must maintain that boundary.
 
 The `.gitignore` has been expanded to reduce accidental commits of runtime data.
 
@@ -86,4 +88,5 @@ Before publishing screenshots, check all visible names, paths, dates, salaries, 
 - Move public demo fixtures to an explicit `examples/` folder if they are intended for publication.
 - Prefer the synthetic examples under `examples/` for demos.
 
-See [Publication Readiness Audit](publication-readiness-audit.md) for the current release-blocking findings before any public push.
+See [Publication Readiness Audit](publication-readiness-audit.md) for the
+historical private-repository cleanup. It is not the current public release gate.

@@ -194,6 +194,72 @@ def test_taxonomy_migration_is_idempotent(tmp_path):
     assert second["merged"] >= first["created"]
 
 
+@pytest.mark.parametrize("status", ["active", "inactive"])
+def test_seed_refresh_preserves_human_review_provenance(tmp_path, monkeypatch, status):
+    db_path = tmp_path / "skills.db"
+    seed = tmp_path / "taxonomy.yaml"
+    seed.write_text("seed_skill:\n  label: Seed Skill\n", encoding="utf-8")
+    monkeypatch.setattr(skill_registry_service, "SKILL_TAXONOMY_FILE", seed)
+
+    class SeedAliases:
+        def load_aliases(self):
+            return {"seed_skill": ["Human Alias", "New Seed Alias"]}
+
+    monkeypatch.setattr(skill_registry_service, "YamlTaxonomyRepository", SeedAliases)
+    migrate_taxonomy_to_skill_registry(db_path=db_path)
+    reviewed = save_skill(
+        "seed_skill", display_name="Reviewed Skill", description="Human description",
+        aliases=["Human Alias"], created_by="human_review", source="review_queue",
+        status=status, db_path=db_path,
+    ).entry
+    for _ in range(2):
+        migrate_taxonomy_to_skill_registry(db_path=db_path)
+    refreshed = find_skill("Human Alias", db_path=db_path)
+    assert refreshed.id == reviewed.id
+    assert refreshed.source == "review_queue"
+    assert refreshed.created_by == reviewed.created_by
+    assert refreshed.status == status
+    assert refreshed.display_name == "Reviewed Skill"
+    assert refreshed.description == "Human description"
+    assert refreshed.updated_at == reviewed.updated_at
+    assert "New Seed Alias" in refreshed.aliases
+
+
+def test_seed_import_preserves_runtime_entry_and_human_alias_ownership(tmp_path, monkeypatch):
+    db_path = tmp_path / "skills.db"
+    runtime = save_skill(
+        "Human Concept", aliases=["Shared Alias"], source="manual_registry",
+        created_by="human_review", status="inactive", db_path=db_path,
+    ).entry
+    seed = tmp_path / "taxonomy.yaml"
+    seed.write_text("seed_skill:\n  label: Shared Alias\n", encoding="utf-8")
+    monkeypatch.setattr(skill_registry_service, "SKILL_TAXONOMY_FILE", seed)
+
+    class SeedAliases:
+        def load_aliases(self):
+            return {"Another Concept": ["Shared Alias"]}
+
+    monkeypatch.setattr(skill_registry_service, "YamlTaxonomyRepository", SeedAliases)
+    migrate_taxonomy_to_skill_registry(db_path=db_path)
+    preserved = find_skill("Shared Alias", db_path=db_path)
+    assert preserved.id == runtime.id
+    assert preserved.source == "manual_registry"
+    assert preserved.status == "inactive"
+    assert preserved.display_name == "Human Concept"
+
+
+def test_seed_only_entry_can_still_receive_seed_updates(tmp_path):
+    db_path = tmp_path / "skills.db"
+    first = save_skill("seed", created_by="migration", source="seed.yaml", db_path=db_path)
+    updated = save_skill(
+        "seed", display_name="Updated seed", aliases=["New alias"],
+        created_by="migration", source="seed.yaml", db_path=db_path,
+    )
+    assert updated.entry.id == first.entry.id
+    assert updated.entry.display_name == "Updated seed"
+    assert "New alias" in updated.entry.aliases
+
+
 def test_taxonomy_migration_handles_missing_seed_file(tmp_path, monkeypatch):
     db_path = tmp_path / "skills.db"
     monkeypatch.setattr(

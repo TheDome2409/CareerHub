@@ -14,7 +14,8 @@ generation.
 
 The public candidate was exported from approved private source commit
 `6b48856c68dd58f627d5c8bca70d7a814443fb9a` and initialized with a new public
-single-commit Git history. The private Git history was not carried into the
+initial single-commit Git history, followed by public documentation/fix commits.
+The private Git history was not carried into the
 public repository.
 
 ## AI-Assisted Development

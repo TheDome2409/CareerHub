@@ -52,10 +52,11 @@ Unknown skills may be suggested by rules or LLMs, but they should not
 automatically become active profile knowledge. The review queue and registry
 workflow keep approval explicit.
 
-### SQLite As Runtime Source Of Truth
+### Registry-First Persistent Skill Knowledge
 
 The Persistent Skill Registry uses SQLite so approved skills and aliases survive
-restarts and are available to matching immediately.
+restarts and are available to matching immediately. YAML seeds, keywords and
+alias fallbacks remain runtime inputs; SQLite-only lookup is future work.
 
 ### YAML As Seed And Import Source
 
@@ -121,7 +122,8 @@ CareerHub uses several quality and governance practices:
 
 ## Outcome
 
-The v0.1.0 public candidate is release-ready as a portfolio repository:
+The public candidate before pre-publication remediation was assessed as a
+portfolio prototype, with the following recorded checks and capabilities:
 
 - `324 passed, 3 skipped`
 - AGPLv3 license

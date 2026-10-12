@@ -84,6 +84,10 @@ def _display_name(value: str) -> str:
     )
 
 
+def _is_seed_provenance(created_by: str, source: str) -> bool:
+    return created_by in {"migration", "system"} and str(source).endswith(".yaml")
+
+
 def _row_to_entry(connection: sqlite3.Connection, row) -> SkillRegistryEntry | None:
     if row is None:
         return None
@@ -515,6 +519,10 @@ def save_skill(
 
             if existing:
                 previous_entry = existing
+                preserve_runtime = (
+                    _is_seed_provenance(created_by, source)
+                    and not _is_seed_provenance(existing.created_by, existing.source)
+                )
                 connection.execute(
                     """
                     UPDATE skill_registry
@@ -526,11 +534,14 @@ def save_skill(
                     WHERE id = ?
                     """,
                     (
-                        display_name or existing.display_name,
-                        description,
-                        now,
-                        source or existing.source,
-                        status or existing.status,
+                        (
+                            existing.display_name if preserve_runtime
+                            else display_name or existing.display_name
+                        ),
+                        None if preserve_runtime else description,
+                        existing.updated_at if preserve_runtime else now,
+                        existing.source if preserve_runtime else source or existing.source,
+                        existing.status if preserve_runtime else status or existing.status,
                         existing.id,
                     ),
                 )
@@ -873,10 +884,7 @@ def migrate_taxonomy_to_skill_registry(
                     ),
                 ).fetchall()
                 for row in rows:
-                    if (
-                        row["created_by"] == "migration"
-                        or str(row["source"]).endswith(".yaml")
-                    ):
+                    if _is_seed_provenance(row["created_by"], row["source"]):
                         connection.execute(
                             """
                             DELETE FROM skill_registry_aliases
@@ -932,9 +940,8 @@ def migrate_taxonomy_to_skill_registry(
                     if (
                         existing_alias
                         and existing_alias["skill_id"] != entry.id
-                        and (
-                            existing_alias["created_by"] == "migration"
-                            or str(existing_alias["source"]).endswith(".yaml")
+                        and _is_seed_provenance(
+                            existing_alias["created_by"], existing_alias["source"]
                         )
                     ):
                         connection.execute(

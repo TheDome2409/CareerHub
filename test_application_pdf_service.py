@@ -1,6 +1,8 @@
 import sys
 from types import SimpleNamespace
 
+import pytest
+
 from jobagent.services import application_pdf_service
 
 
@@ -295,6 +297,43 @@ def test_merge_pdf_documents_preserves_document_order():
     assert len(reader.pages) == 2
 
 
+@pytest.mark.parametrize("name, content", [
+    ("corrupt.pdf", b"%PDF broken"),
+    ("empty.pdf", b""),
+    ("broken.png", b"not an image"),
+])
+def test_final_pdf_fails_with_named_invalid_attachment(monkeypatch, name, content):
+    monkeypatch.setattr(application_pdf_service, "render_application_pdf", lambda _: _blank_pdf())
+    with pytest.raises(application_pdf_service.PdfPackageIntegrityError) as error:
+        application_pdf_service.render_final_application_pdf(
+            "<html>synthetic application</html>",
+            [{"name": name, "bytes": content}],
+        )
+    assert error.value.document_name == name
+    assert name in str(error.value)
+
+
+def test_merge_rejects_corrupt_base_instead_of_returning_attachment_only():
+    with pytest.raises(application_pdf_service.PdfPackageIntegrityError) as error:
+        application_pdf_service.merge_pdf_documents(
+            [b"corrupt base", _blank_pdf()], ["Basisdokument", "certificate.pdf"]
+        )
+    assert error.value.document_name == "Basisdokument"
+
+
+def test_pdf_ui_reports_attachment_error_without_crashing(monkeypatch):
+    from jobagent.ui import application_tab
+
+    messages = []
+    monkeypatch.setattr(application_tab.st, "error", messages.append)
+    monkeypatch.setattr(application_pdf_service, "render_application_pdf", lambda _: _blank_pdf())
+    assert application_tab._application_pdf_bytes(
+        "<html></html>", [{"name": "corrupt.pdf", "bytes": b"broken"}]
+    ) is None
+    assert len(messages) == 1
+    assert "corrupt.pdf" in messages[0]
+
+
 def test_render_final_application_pdf_appends_pdf_attachments(monkeypatch):
     base_pdf = _blank_pdf()
     attachment_pdf = _blank_pdf()
@@ -358,7 +397,7 @@ def test_render_final_application_pdf_returns_none_when_merge_fails(monkeypatch)
     monkeypatch.setattr(
         application_pdf_service,
         "merge_pdf_documents",
-        lambda _documents: None,
+        lambda _documents, **_kwargs: None,
     )
 
     assert (
@@ -376,7 +415,7 @@ def test_render_final_application_pdf_returns_none_when_merge_fails(monkeypatch)
     )
 
 
-def test_render_final_application_pdf_allows_base_pdf_without_mergeable_attachments(
+def test_render_final_application_pdf_rejects_unsupported_requested_attachment(
     monkeypatch,
 ):
     base_pdf = _blank_pdf()
@@ -389,10 +428,10 @@ def test_render_final_application_pdf_allows_base_pdf_without_mergeable_attachme
     monkeypatch.setattr(
         application_pdf_service,
         "merge_pdf_documents",
-        lambda _documents: None,
+        lambda _documents, **_kwargs: None,
     )
 
-    assert (
+    with pytest.raises(application_pdf_service.PdfPackageIntegrityError) as error:
         application_pdf_service.render_final_application_pdf(
             "<html>Example Technologies</html>",
             [
@@ -403,8 +442,7 @@ def test_render_final_application_pdf_allows_base_pdf_without_mergeable_attachme
                 }
             ],
         )
-        == base_pdf
-    )
+    assert error.value.document_name == "Hinweise.txt"
 
 
 def test_render_final_application_pdf_converts_image_attachments(monkeypatch):

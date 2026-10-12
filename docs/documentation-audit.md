@@ -2,6 +2,11 @@
 
 Date: 2026-07-11
 
+Scope: **Historical private-development audit**, before the public export and
+subsequent fixes. Findings and counts below describe that earlier snapshot;
+they are not current public-release assertions. For current behavior see
+[Architecture](architecture.md), [Features](features.md) and the README.
+
 ## Summary
 
 The repository contains a broad local CareerHub prototype plus a growing CompanyHub module and an experimental OpenLLMBench foundation. The code supports profile handling, job loading, skill extraction, unknown skill review, job scoring, application package generation, company source management, company evidence extraction, company knowledge drafts and local Ollama integration.

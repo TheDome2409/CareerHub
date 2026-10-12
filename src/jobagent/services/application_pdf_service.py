@@ -566,8 +566,17 @@ def _attachment_pdf_bytes(attachment: dict) -> bytes | None:
     return None
 
 
+class PdfPackageIntegrityError(ValueError):
+    """A requested document could not be included in the final package."""
+
+    def __init__(self, document_name: str, reason: str):
+        self.document_name = document_name
+        super().__init__(f"PDF-Export abgebrochen: {document_name}: {reason}")
+
+
 def merge_pdf_documents(
     pdf_documents: list[bytes],
+    document_names: list[str] | None = None,
 ) -> bytes | None:
     try:
         from pypdf import PdfReader, PdfWriter
@@ -576,21 +585,27 @@ def merge_pdf_documents(
 
     writer = PdfWriter()
 
-    for pdf_bytes in pdf_documents:
+    for index, pdf_bytes in enumerate(pdf_documents):
+        name = (
+            document_names[index]
+            if document_names and index < len(document_names)
+            else f"Dokument {index + 1}"
+        )
         if not pdf_bytes:
-            continue
+            raise PdfPackageIntegrityError(name, "Dokument ist leer.")
 
         try:
             reader = PdfReader(
                 BytesIO(pdf_bytes)
             )
-        except Exception:
-            continue
-
-        for page in reader.pages:
-            writer.add_page(
-                page
-            )
+            if not reader.pages:
+                raise ValueError("PDF contains no pages")
+            for page in reader.pages:
+                writer.add_page(page)
+        except Exception as exc:
+            raise PdfPackageIntegrityError(
+                name, "PDF ist nicht lesbar oder kann nicht eingebunden werden."
+            ) from exc
 
     if not writer.pages:
         return None
@@ -617,25 +632,36 @@ def render_final_application_pdf(
     pdf_documents = [
         base_pdf,
     ]
+    document_names = ["Basisdokument"]
 
-    for attachment in attachments or []:
-        attachment_pdf = _attachment_pdf_bytes(
-            attachment
+    for index, attachment in enumerate(attachments or []):
+        name = str(
+            attachment.get("display_title")
+            or attachment.get("name")
+            or attachment.get("archive_name")
+            or f"Anlage {index + 1}"
         )
+        try:
+            attachment_pdf = _attachment_pdf_bytes(attachment)
+        except Exception as exc:
+            raise PdfPackageIntegrityError(name, "Anlage kann nicht gelesen werden.") from exc
 
-        if attachment_pdf:
-            pdf_documents.append(
-                attachment_pdf
+        if not attachment_pdf:
+            raise PdfPackageIntegrityError(
+                name, "Anlage ist leer, defekt oder kein unterstütztes PDF/Bild."
             )
+        pdf_documents.append(attachment_pdf)
+        document_names.append(name)
 
     merged_pdf = merge_pdf_documents(
-        pdf_documents
+        pdf_documents,
+        document_names=document_names,
     )
 
     if len(pdf_documents) > 1 and not merged_pdf:
         return None
 
-    return merged_pdf or base_pdf
+    return merged_pdf
 
 
 def render_application_summary_pdf(

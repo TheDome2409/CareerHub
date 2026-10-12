@@ -21,6 +21,7 @@ from jobagent.services.application_package_service import (
     application_zip_bytes,
 )
 from jobagent.services.application_pdf_service import (
+    PdfPackageIntegrityError,
     html_pdf_renderer_status,
     is_html_pdf_renderer_available,
     render_final_application_pdf,
@@ -579,10 +580,11 @@ def _application_pdf_bytes(
     html_content: str,
     attachments: list[dict] | None = None,
 ) -> bytes | None:
-    return render_final_application_pdf(
-        html_content,
-        attachments or [],
-    )
+    try:
+        return render_final_application_pdf(html_content, attachments or [])
+    except PdfPackageIntegrityError as error:
+        st.error(str(error))
+        return None
 
 
 def _pdf_renderer_status_text() -> str:
@@ -1116,6 +1118,8 @@ def _render_company_application_export(
             file_name=f"{file_stem}.pdf",
             mime="application/pdf",
         )
+    elif html_pdf_renderer_available:
+        st.info("PDF-Export fehlgeschlagen. Bitte Anlagen prüfen; HTML/ZIP bleiben verfügbar.")
     else:
         st.info(
             "Fuer automatische PDF-Erzeugung bitte WeasyPrint oder "
@@ -1833,7 +1837,8 @@ def render_application_tab():
 
         final_pdf_content = None
 
-        if is_html_pdf_renderer_available():
+        html_pdf_renderer_available = is_html_pdf_renderer_available()
+        if html_pdf_renderer_available:
             final_pdf_content = _application_pdf_bytes(
                 html_content,
                 attachments,
@@ -1846,6 +1851,8 @@ def render_application_tab():
                 file_name="bewerbungsmappe.pdf",
                 mime="application/pdf",
             )
+        elif html_pdf_renderer_available:
+            st.info("PDF-Export fehlgeschlagen. Bitte Anlagen prüfen; HTML/ZIP bleiben verfügbar.")
         else:
             st.info(
                 "Fuer automatische PDF-Erzeugung bitte WeasyPrint oder "

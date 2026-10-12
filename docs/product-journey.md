@@ -124,12 +124,13 @@ experimental and not the main CareerHub runtime.
 ### Persistent Skill Registry V1
 
 The review queue alone was not enough. Approved skills needed a persistent
-runtime source of truth so that new knowledge survives restarts and immediately
+durable runtime storage so that new knowledge survives restarts and immediately
 affects matching.
 
 The SQLite Skill Registry was therefore prioritized before the public release.
-YAML remains useful for seeds, examples and import/export, but the registry is
-the runtime knowledge base for approved skills and aliases.
+The current architecture is registry-first: SQLite stores reviewed skills and
+aliases, while YAML still supplies seed migration, keywords and alias fallbacks.
+An exclusive SQLite runtime is future work; see ADR 0003.
 
 ### Open-Source Release Process
 

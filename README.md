@@ -6,12 +6,12 @@ generation.
 
 It combines deterministic scoring, human-reviewed skill governance, document
 processing, optional local LLM support through Ollama and synthetic demo data.
-The project is published as a portfolio-grade open-source release: transparent,
+The project is prepared for a portfolio-grade open-source release: transparent,
 test-backed and careful about privacy, while still clearly marked as a prototype.
 
 ## Project Status
 
-CareerHub v0.1.0 is an **Initial Public Portfolio Release**.
+CareerHub v0.1.0 is an **Initial Public Portfolio Release candidate**.
 
 Status terms used in this repository:
 
@@ -41,8 +41,9 @@ decisions, LLM-generated text and application documents.
   skill, competency and role-mismatch components.
 - Unknown skill detection, canonicalization, candidate typing and JSON review
   queue persistence.
-- Persistent SQLite Skill Registry: human-approved candidates can create skills,
-  merge aliases or surface type conflicts.
+- Persistent SQLite Skill Registry with registry-first lookup: human-approved
+  candidates can create skills, merge aliases or surface type conflicts. YAML
+  seeds, configured keywords and fallback aliases remain runtime inputs.
 - CompanyHub foundations: tracked companies, sources, fetched documents,
   evidence extraction, canonical concepts, knowledge drafts and pipeline
   inspection.
@@ -119,6 +120,9 @@ Demo flow: [docs/demo.md](docs/demo.md).
 
 ## Quick Start
 
+Tested release environment: **Python 3.12.9 on Windows**; CI targets Python 3.12.
+Other Python/platform combinations have not been established by this release check.
+
 Install dependencies:
 
 ```powershell
@@ -133,7 +137,7 @@ start_gui.bat
 
 Or start manually from the repository root:
 
-```powershell
+```cmd
 set PYTHONPATH=%CD%\src
 python -m streamlit run src\jobagent\ui\streamlit_app.py
 ```
@@ -158,6 +162,21 @@ Install Ollama separately and pull a local model that you are licensed to use.
 The repository does not distribute model weights. Model licenses vary by model
 and tag.
 
+Application drafting (job letters, context resumes and initiative letters) and
+unknown-skill evaluation explicitly use `qwen3:30b`. Profile LLM skill extraction
+also defaults to this model. To use these current UI workflows:
+
+```powershell
+ollama pull qwen3:30b
+```
+
+CompanyHub knowledge review supports installed-model selection in the UI, with
+`COMPANYHUB_OLLAMA_MODEL` or `OLLAMA_MODEL` as defaults and `OLLAMA_BASE_URL` for
+its REST endpoint (default `http://localhost:11434`). The Ollama Python client
+uses `OLLAMA_HOST`. These are separate configuration paths; `OLLAMA_MODEL` is
+not a global override for the application/skill workflows. The benchmark runner
+uses its own model configuration in `config/benchmark_models.yaml`.
+
 If Ollama is unavailable, deterministic parts of CareerHub should still be
 usable; LLM-backed actions show fallback or error messages.
 
@@ -177,6 +196,10 @@ Optional local tools:
 
 Without a real HTML-to-PDF renderer, CareerHub does not offer a full final PDF
 package and falls back to HTML/ZIP export paths.
+
+Final PDF export fails explicitly if a selected attachment is unreadable, empty
+or unsupported. PDF and image attachments are supported; other files remain
+available in HTML/ZIP but must be converted or deselected for a final PDF.
 
 ## Synthetic Demo Data
 
@@ -210,6 +233,21 @@ runtime databases, uploads, generated exports, logs and benchmark outputs.
 For Bundesagentur job search, set `BUNDESAGENTUR_API_KEY` locally. The
 repository does not ship a real API key.
 
+`.env.example` is a variable reference, **not an automatically loaded config**.
+No dotenv loader is installed. Set variables in the launching shell, for example:
+
+```powershell
+$env:BUNDESAGENTUR_API_KEY = "replace-with-your-client-identifier"
+$env:OLLAMA_BASE_URL = "http://localhost:11434"
+# Optional when OCR tools are not on PATH:
+# $env:TESSERACT_CMD = "<path-to-tesseract-executable>"
+# $env:POPPLER_PATH = "<path-to-poppler-bin>"
+```
+
+Ollama/models, native OCR tools and PDF renderers are optional for deterministic
+matching and service tests, but required for their respective LLM/OCR/PDF actions.
+`requirements.txt` installs Python adapters, not native binaries or model weights.
+
 ## Test Instructions
 
 Run the full suite:
@@ -228,14 +266,26 @@ python -m pytest test_application_pdf_service.py test_company_application_packag
 python -m pytest test_openllmbench_docs.py -q
 ```
 
-The v0.1.0 public candidate was checked with:
+The public candidate before pre-publication remediation was checked with:
 
 - `324 passed, 3 skipped, 0 failed`
 - documentation smoke: `3 passed`
 - `compileall -q src`: successful
 
+Pre-publication remediation verified on 2026-10-12 in Python 3.12.9:
+
+- full suite: **333 passed, 3 skipped, 0 failed**
+- focused PDF/registry/review regressions: **42 passed**
+- `compileall -q src`: successful
+
 The skipped tests are for optional DuckDB benchmark archive support when DuckDB
 is not installed.
+
+Coverage includes unit/service regressions (including real SQLite and PDF merge),
+source/string-based UI smoke checks and mocked HTML-to-PDF renderer tests. This
+count does not establish a clicked-through GUI workflow, native OCR operation,
+real LLM quality or visual PDF correctness. Real renderer/GUI end-to-end validation
+remains a separate manual release check.
 
 ## Privacy And Responsible AI
 

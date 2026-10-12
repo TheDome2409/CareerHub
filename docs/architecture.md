@@ -42,7 +42,7 @@ Files:
 - `src/jobagent/services/document_processing_service.py`
 - `src/jobagent/models/document_processing_result.py`
 
-Supported inputs include HTML, PDF, DOCX, Markdown and plain text. PDF text extraction uses `pypdf`. OCR is available through a Tesseract/Poppler adapter, but the current OCR helper contains local Windows paths and is not portable without configuration.
+Supported inputs include HTML, PDF, DOCX, Markdown and plain text. PDF text extraction uses `pypdf`. OCR uses a Tesseract/Poppler adapter with `TESSERACT_CMD` and `POPPLER_PATH` environment overrides or tools on PATH. German OCR language data is required. No developer-specific OCR path is a default.
 
 ### Skill Extraction And Review Queue
 
@@ -65,7 +65,7 @@ Candidate types include skills, roles, certifications, context terms, frameworks
 
 Approved review items are persisted into the SQLite Skill Registry. The registry stores canonical names, display names, types, aliases, status, provenance and timestamps. It performs alias-based merge checks before insert and records type conflicts instead of merging across different types. Active registry entries are read by skill canonicalization and taxonomy loading, so new reviewed skills become available to matching without restarting the application.
 
-`config/skill_taxonomy.yaml` remains a seed/import source. It is not the only runtime source of known skills once the registry has been initialized.
+The design is registry-first, not SQLite-only. Taxonomy loading invokes idempotent YAML seed migration, supplements keywords from `config/skill_taxonomy.yaml` and falls back to YAML on registry errors. Alias lookup retains a YAML-backed fallback. Seed refreshes preserve human/runtime provenance and status while allowing new seed aliases. See [ADR 0003](adr/0003-sqlite-skill-registry-source-of-truth.md). SQLite-only runtime behavior is future work.
 
 ### Job Matching
 
@@ -113,6 +113,11 @@ Files:
 
 CareerHub can generate cover letters, context resume text and initiative letters using local Ollama. HTML and ZIP exports are implemented. Full PDF export requires WeasyPrint or wkhtmltopdf/pdfkit; selected PDF/image attachments can be merged through `pypdf`.
 
+Unreadable, empty or unsupported selected attachments stop final PDF export with
+`PdfPackageIntegrityError`, identifying the document. The UI reports the failure;
+HTML/ZIP remain available. Supported final-PDF attachments are PDF and image files,
+not arbitrary office/text files.
+
 ### CompanyHub
 
 Status: **Implemented / Experimental**
@@ -145,6 +150,12 @@ Files:
 - `src/jobagent/services/ollama_provider.py`
 
 The application uses local Ollama. Some CareerHub paths default to `qwen3:30b`. CompanyHub knowledge review can list local Ollama models and use a selected model where available.
+
+Application drafting and unknown-skill evaluation explicitly use `qwen3:30b`.
+The profile extraction adapter also defaults to it. These UI paths do not use
+`OLLAMA_MODEL` as a universal override. CompanyHub's REST client supports
+`OLLAMA_BASE_URL`, `COMPANYHUB_OLLAMA_MODEL` and `OLLAMA_MODEL`; the Ollama Python
+client uses its own host configuration (`OLLAMA_HOST`). No `.env` loader exists.
 
 ### OpenLLMBench
 

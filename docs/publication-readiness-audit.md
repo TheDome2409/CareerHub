@@ -2,6 +2,11 @@
 
 Date: 2026-07-11
 
+Scope: **Historical private-repository audit**, before the clean public history
+and later feature fixes. The 303-test result and local-file observations below
+apply only to that snapshot. Current public release checks are documented in
+the README; this report is retained as historical evidence.
+
 ## Verdict
 
 Status: **Ready with minor changes**

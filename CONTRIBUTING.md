@@ -1,6 +1,6 @@
 # Contributing
 
-CareerHub is currently a private local prototype. Contributions, experiments and bug reports should keep the project safe to publish later.
+CareerHub is a local prototype prepared for a public v0.1.0 portfolio release. Contributions, experiments and bug reports must use public-safe data.
 
 ## Principles
 
@@ -42,6 +42,10 @@ Never add:
 
 Run the smallest relevant test set for the change. Examples:
 
+The release-check environment uses Python 3.12.9 on Windows. Set
+`$env:PYTHONPATH = "src;."` before the commands below. `.env` is not loaded
+automatically; supply required variables in your shell.
+
 ```powershell
 python -m pytest test_skill_profile_io.py
 python -m pytest test_company_profile_match_service.py
@@ -49,6 +53,10 @@ python -m pytest test_application_pdf_service.py
 ```
 
 Use broader test runs before larger documentation or architecture changes.
+
+Distinguish unit/service tests, source/string-based UI smoke tests and mocked
+renderer tests from real GUI/PDF end-to-end validation. Passing the automated
+suite does not establish visual quality or production maturity.
 
 ## Documentation
 
