@@ -123,19 +123,38 @@ Demo flow: [docs/demo.md](docs/demo.md).
 Tested release environment: **Python 3.12.9 on Windows**; CI targets Python 3.12.
 Other Python/platform combinations have not been established by this release check.
 
-Install dependencies:
+Windows application setup (review the script, then run from PowerShell):
 
 ```powershell
-python -m pip install -r requirements.txt
+.\setup_windows.ps1 -Install
+.\start_gui.bat
 ```
 
-Start the Streamlit app on Windows:
+Dependency diagnostics (no installation, no LLM requests by default):
 
 ```powershell
-start_gui.bat
+.\setup_windows.ps1 -CheckOnly
+.\setup_windows.ps1 -CheckOnly -Json
 ```
 
-Or start manually from the repository root:
+The bootstrap creates/reuses `.venv`, installs Python dependencies and invokes
+the existing SQLite/schema/Skill Registry seed initialization. It does not
+install native tools/models or overwrite configuration. Optional missing
+capabilities do not fail the core check. No admin elevation is requested.
+
+Diagnostics distinguish `host_pip_consistency` from the managed `.venv` checks.
+Before installation, `INSTALL_READY=true` can coexist with `CORE_READY=false`:
+this means not installed, not that unrelated global pip conflicts broke CareerHub.
+After installation, only the managed environment determines core readiness.
+
+- [Quick demo / one-page Windows start](docs/windows-quick-start.md)
+- [Full local setup, dependency matrix and troubleshooting](docs/windows-setup.md)
+- [Development setup](CONTRIBUTING.md)
+- [Bootstrap architecture decision](docs/adr/0006-windows-bootstrapper.md)
+
+Manual setup/start from the repository root is still available. Create a
+Python 3.12 virtual environment and install `requirements.txt` first, as shown
+in the quick-start guide, then:
 
 ```cmd
 set PYTHONPATH=%CD%\src

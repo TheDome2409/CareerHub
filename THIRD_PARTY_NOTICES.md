@@ -13,6 +13,11 @@ notes from the `.venv-release-check` environment.
 
 This file is not legal advice.
 
+The [Windows bootstrapper](docs/windows-setup.md) installs Python requirements
+from PyPI only when explicitly requested. It does not redistribute or
+auto-install native tools/model weights. Its supplier/integrity guidance does
+not constitute license clearance or a supply-chain attestation.
+
 ## Direct Python Dependencies
 
 The initial public portfolio candidate directly declares these Python packages:

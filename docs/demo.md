@@ -2,6 +2,12 @@
 
 This demo flow is intended for recruiters, technical interviewers or portfolio reviewers. Use only synthetic or public-safe data.
 
+Setup: [Windows Quick Start](windows-quick-start.md). A minimal demo can use
+the synthetic skill CSV and manual company profile without a local LLM.
+OCR, drafting and full PDF export require their respective optional tools.
+Job-source examples enable network sources; there is no automatic offline job
+fixture loader. See the [dependency matrix](windows-setup.md).
+
 ## Demo 1: Profile And Skill Review
 
 Status: **Implemented**
